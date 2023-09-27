@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+
+int main() {
+
+
+	int pipefd_A[2];
+	int pipefd_B[2];
+	static char buf[100];
+	FILE *fp_priklad;
+	FILE *fp_vysledok;
+
+	pipe(pipefd_A);
+	pipe(pipefd_B);
+	if ( fork()==0) {
+		// Zavriem nepotrebne konce rur
+		close(pipefd_A[1]);
+		close(pipefd_B[0]);
+		// Duplikuju sa konce rur do stdin/out
+		dup2(pipefd_A[0],0);
+		dup2(pipefd_B[1],1);
+		// Zavru sa konce rur
+		close(pipefd_A[0]);
+		close(pipefd_B[1]);
+		execl("/bin/bc","bc",NULL);
+	} else {
+		// Zavriem nepotrebne konce rur
+		close(pipefd_A[0]);
+		close(pipefd_B[1]);
+		// Pre pohodlie, pouzijeme FILE*
+		fp_priklad=fdopen(pipefd_A[1],"w");
+		fp_vysledok=fdopen(pipefd_B[0],"r");
+		fprintf(fp_priklad,"7*8\n");
+		fgets(buf,sizeof(buf)-1,fp_vysledok);
+		printf("%s",buf);
+	}
+}
