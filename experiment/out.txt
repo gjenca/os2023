@@ -1,4 +1,3 @@
-ahoj
-dovi
-slon
-kapybara
+1:slimak
+2:pstros
+20:dvadsatnozka
