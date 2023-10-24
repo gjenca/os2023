@@ -1,0 +1,12 @@
+#!/bin/bash
+
+curl -s https://www.stuba.sk | 
+#    Stiahne obsah z URL, da na stdout
+tr -d '\n' | 
+#    Zmaze newline
+tr '<' '\n' | 
+#    Nahradi < newline
+grep '^img ' |
+#    Vyhlada img
+sed 's/.*src="\([^"]*\)".*/\1/'
+# Vyfiltruje hodnotu src atributu z kazdeho riadku
