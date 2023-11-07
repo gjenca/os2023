@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+import math
+
+def primes(n):
+
+    ret=set(range(2,n))
+    for k in range(2,int(math.sqrt(n))+1):
+        if k in ret:
+            for nas in range(2*k,n,k):
+                ret.discard(nas)
+
+    return ret
+
+print(primes(100))
+
+    
