@@ -3,6 +3,8 @@
 import math
 
 def primes(n,start_at=2):
+    '''Vráti zoznam všetkých prvočísel z 
+    intervalu [start_at,n)'''
 
     ret = []
     for k in range(start_at,n):
@@ -13,8 +15,5 @@ def primes(n,start_at=2):
         else:
             ret.append(k)
     return ret
-
-print(primes(100))
-print(primes(200,100))
 
 

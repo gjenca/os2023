@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-
+'''Modul pre generovanie prvočísel
+'''
 import math
 
 def primes(n,start_at=2):
+    '''Vráti zoznam všetkých prvočísel z 
+intervalu [start_at,n)'''
 
     ret = []
     for k in range(start_at,n):
