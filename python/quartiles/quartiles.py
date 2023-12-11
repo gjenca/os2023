@@ -25,17 +25,6 @@ def search_scimago(journal_name):
         time.sleep(0.1)
     return ret
 
-def find_best(what,where):
-
-    ret_best=None
-    maximum=0
-    for s in where:
-        this_ratio=difflib.SequenceMatcher(None,what,s).ratio()
-        if this_ratio>maximum:
-            ret_best=s
-            maximum=this_ratio
-    return ret_best
-
 def find_best2(what,where):
 
     return max(where,key = lambda s: difflib.SequenceMatcher(None,what,s).ratio())
