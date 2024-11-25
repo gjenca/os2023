@@ -1,14 +1,13 @@
 
-def cache(f):
+def memoize(f):
 
     d={}
     def ret_f(x):
 
-        if x not in d:
-            d[x]=f(x)
-            print('cache not hit',x)
+        if x in d:
+            return d[x]
         else:
-            print('cache hit')
+            d[x]=f(x)
         return d[x]
 
     return ret_f
